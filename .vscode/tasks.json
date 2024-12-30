@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [{
+        "label": "devtool_build",
+        "options": {"cwd": "${env:HOME}/poky_sdk"},
+        "command": "./layers/poky/scripts/devtool", 
+        "args": ["build", "bb-cmake-example"],
+        "type": "shell"
+    },
+    {
+        "label": "devtool_deploy",
+        "options": {"cwd": "${env:HOME}/poky_sdk"},
+        "command": "./layers/poky/scripts/devtool", 
+        "args": ["deploy-target", "bb-cmake-example", "root@192.168.7.2" ],
+        "type": "shell"
+    },
+    {
+        "label": "gdbserver_start",
+        "command": "ssh", 
+        "args": ["root@192.168.7.2", "'gdbserver --once localhost:1234 /usr/bin/HelloWorld'" ],
+        "type": "shell",
+    },
+    {
+        "label": "prelaunch",
+        "dependsOn": ["devtool_deploy"],
+        "dependsOrder": "sequence" 
+    }]
+}

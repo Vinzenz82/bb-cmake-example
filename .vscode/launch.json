@@ -7,6 +7,9 @@
       "program": "${workspaceRoot}/oe-workdir/bb-cmake-example-1.0/HelloWorld", // for loading symbols from running program
       "cwd": "${workspaceFolder}",
   
+      // pre launch tasks
+      "preLaunchTask": "prelaunch", // The name of the task defined above
+
       // if you want to connect at entry point (requires remote program to start paused)
       "stopAtEntry": true,
       "stopAtConnect": true,
