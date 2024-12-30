@@ -1,0 +1,25 @@
+  {
+    "version": "0.2.0",
+    "configurations": [{
+      "name": "Remote",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/oe-workdir/bb-cmake-example-1.0/HelloWorld", // for loading symbols from running program
+      "cwd": "${workspaceFolder}",
+  
+      // if you want to connect at entry point (requires remote program to start paused)
+      "stopAtEntry": true,
+      "stopAtConnect": true,
+  
+      "MIMode": "gdb",
+      "miDebuggerPath": "/opt/poky/4.0.23/sysroots/x86_64-pokysdk-linux/usr/bin/x86_64-poky-linux/x86_64-poky-linux-gdb",
+      "miDebuggerServerAddress": "192.168.7.2:1234",
+      "setupCommands": [{
+        "description": "Enable pretty-printing for gdb",
+        "text": "-enable-pretty-printing",
+        "ignoreFailures": true,
+    }]
+  }]
+  }
+
+  
