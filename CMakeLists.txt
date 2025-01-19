@@ -7,17 +7,25 @@ project(BB-CMAKE-EXAMPLE VERSION 1.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Setze den C++ Compiler Pfad (angepasst für deinen Compiler)
-#set(TOOLCHAIN_PREFIX /opt/poky/4.0.23/sysroots/x86_64-pokysdk-linux/usr/bin/x86_64-poky-linux/)
-#set(CMAKE_C_COMPILER ${TOOLCHAIN_PREFIX}x86_64-poky-linux-gcc)
-#set(CMAKE_CXX_COMPILER ${TOOLCHAIN_PREFIX}x86_64-poky-linux-g++)
+# add the executables
+add_executable(HelloStaticWorld main.cxx)
+add_executable(HelloDynamicWorld main.cxx)
 
-#set(CMAKE_SYSROOT /opt/poky/4.0.23/sysroots/core2-64-poky-linux)
+target_compile_options(HelloStaticWorld PUBLIC
+                        -Wall
+                        -pedantic 
+                        -Og 
+                        -g
+)
 
-add_compile_options(-Wall -pedantic -Og -g)
-add_link_options("-static")
+target_compile_options(HelloDynamicWorld PUBLIC
+                        -Wall
+                        -pedantic 
+                        -Og 
+                        -g
+)
 
-# add the executable
-add_executable(HelloWorld main.cxx)
+target_link_options(HelloStaticWorld PUBLIC -static)
 
-install(TARGETS HelloWorld DESTINATION bin)
+install(TARGETS HelloStaticWorld DESTINATION bin)
+install(TARGETS HelloDynamicWorld DESTINATION bin)
