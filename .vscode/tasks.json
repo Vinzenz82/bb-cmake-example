@@ -5,24 +5,30 @@
         "options": {"cwd": "${env:HOME}/poky_sdk"},
         "command": "./layers/poky/scripts/devtool", 
         "args": ["build", "bb-cmake-example"],
-        "type": "shell"
+        "type": "shell",
+        "problemMatcher": []
     },
     {
         "label": "devtool_deploy",
         "options": {"cwd": "${env:HOME}/poky_sdk"},
         "command": "./layers/poky/scripts/devtool", 
-        "args": ["deploy-target", "bb-cmake-example", "root@192.168.7.2" ],
-        "type": "shell"
+        "args": ["deploy-target", "bb-cmake-example", "root@192.168.1.211" ],
+        "type": "shell",
+        "problemMatcher": []
     },
     {
         "label": "gdbserver_start",
         "command": "ssh", 
-        "args": ["root@192.168.7.2", "'gdbserver --once localhost:1234 /usr/bin/HelloWorld'" ],
+        "args": ["root@192.168.1.211", "'gdbserver --once localhost:1234 /usr/bin/HelloStaticWorld'" ],
         "type": "shell",
+        "problemMatcher": [],
     },
     {
-        "label": "prelaunch",
-        "dependsOn": ["devtool_deploy"],
-        "dependsOrder": "sequence" 
+        "label": "Prepare Remote Debugging (build -> deploy -> start on target)",
+        "dependsOn": ["devtool_build",
+                      "devtool_deploy",
+                      "gdbserver_start"],
+        "dependsOrder": "sequence",
+        "problemMatcher": [],
     }]
 }
